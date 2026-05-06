@@ -1,0 +1,2 @@
+# vpm-email-signitures
+
