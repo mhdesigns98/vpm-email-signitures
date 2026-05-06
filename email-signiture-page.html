@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPM Email Signature Guidelines</title>
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            /* VPM Brand Colors - adjusted for accessibility */
+            --vpm-blue-dark: #1a365d;      /* Darker blue for better contrast */
+            --vpm-blue-primary: #2c5282;
+            --vpm-blue-light: #ebf8ff;
+            --vpm-accent: #ed8936;         /* Orange accent */
+            
+            /* Text colors - WCAG AA compliant */
+            --text-primary: #1a202c;       /* Very dark gray - contrast 12.6:1 on white */
+            --text-secondary: #4a5568;     /* Medium gray - contrast 7:1 on white */
+            --text-on-dark: #ffffff;       /* White text on dark backgrounds */
+            --text-muted: #718096;         /* Lighter gray - only for large text */
+            
+            /* Background colors */
+            --bg-white: #ffffff;
+            --bg-light: #f7fafc;
+            --bg-code: #edf2f7;
+            
+            /* Alert colors - accessible versions */
+            --alert-warning-bg: #fffaf0;
+            --alert-warning-border: #dd6b20;
+            --alert-warning-text: #744210;
+            --alert-info-bg: #ebf8ff;
+            --alert-info-border: #3182ce;
+            --alert-info-text: #2a4365;
+            --alert-success-bg: #f0fff4;
+            --alert-success-border: #38a169;
+            --alert-success-text: #22543d;
+            
+            /* Focus indicator */
+            --focus-color: #3182ce;
+            --focus-outline: 3px solid var(--focus-color);
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ===== ACCESSIBILITY: SKIP LINK ===== */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--vpm-blue-dark);
+            color: var(--text-on-dark);
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0 0 8px 8px;
+            z-index: 10000;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+
+        /* ===== FOCUS STATES ===== */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus,
+        [tabindex]:focus {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+
+        /* Remove outline for mouse users, keep for keyboard */
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        :focus-visible {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+
+        /* ===== HEADER - IMPROVED CONTRAST ===== */
+        header {
+            background: linear-gradient(135deg, var(--vpm-blue-dark) 0%, var(--vpm-blue-primary) 100%);
+            color: var(--text-on-dark);
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin: 0 0 var(--spacing-sm) 0;
+            /* Ensure white text - contrast 12.6:1 against dark blue */
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin: 0;
+            /* Slightly off-white for visual hierarchy while maintaining contrast */
+            color: #e2e8f0;
+            /* Contrast ratio 8.5:1 against dark blue background */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: var(--bg-light);
+            border-bottom: 1px solid #e2e8f0;
+            padding: var(--spacing-md) var(--spacing-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            max-width: 900px;
+            margin: 0 auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav h2 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0 0 var(--spacing-sm) 0;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm) var(--spacing-md);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--vpm-blue-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: var(--vpm-blue-light);
+            color: var(--vpm-blue-dark);
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-lg);
+        }
+
+        section {
+            margin-bottom: var(--spacing-2xl);
+            scroll-margin-top: 80px; /* Account for sticky nav */
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--vpm-blue-dark);
+            margin: 0 0 var(--spacing-md) 0;
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 3px solid var(--vpm-accent);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+        }
+
+        p {
+            margin: 0 0 var(--spacing-md) 0;
+        }
+
+        /* ===== ALERTS ===== */
+        .alert {
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border-left: 4px solid;
+            margin: var(--spacing-md) 0;
+        }
+
+        .alert-warning {
+            background: var(--alert-warning-bg);
+            border-color: var(--alert-warning-border);
+            color: var(--alert-warning-text);
+        }
+
+        .alert-info {
+            background: var(--alert-info-bg);
+            border-color: var(--alert-info-border);
+            color: var(--alert-info-text);
+        }
+
+        .alert-success {
+            background: var(--alert-success-bg);
+            border-color: var(--alert-success-border);
+            color: var(--alert-success-text);
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* ===== SIGNATURE TEMPLATE BOX ===== */
+        .signature-container {
+            background: var(--bg-white);
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin: var(--spacing-md) 0;
+            overflow: hidden;
+        }
+
+        .signature-header {
+            background: var(--bg-light);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .signature-header h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .signature-box {
+            padding: var(--spacing-lg);
+            background: var(--bg-white);
+            font-family: Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+
+        /* ===== COPY BUTTON ===== */
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            background: var(--vpm-blue-primary);
+            color: var(--text-on-dark);
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .copy-btn:hover {
+            background: var(--vpm-blue-dark);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.copied {
+            background: var(--alert-success-border);
+        }
+
+        .copy-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ===== ACCORDION ===== */
+        .accordion {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: var(--spacing-md) 0;
+            overflow: hidden;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            width: 100%;
+            background: var(--bg-light);
+            border: none;
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .accordion-header:hover {
+            background: #edf2f7;
+        }
+
+        .accordion-header[aria-expanded="true"] {
+            background: var(--vpm-blue-light);
+            color: var(--vpm-blue-dark);
+        }
+
+        .accordion-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header[aria-expanded="true"] .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: var(--spacing-lg);
+            background: var(--bg-white);
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        /* ===== ORDERED LISTS ===== */
+        ol {
+            padding-left: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+        }
+
+        ol li {
+            margin-bottom: var(--spacing-sm);
+            padding-left: var(--spacing-xs);
+        }
+
+        ol li::marker {
+            font-weight: 600;
+            color: var(--vpm-blue-primary);
+        }
+
+        ul {
+            padding-left: var(--spacing-lg);
+            margin: var(--spacing-sm) 0;
+        }
+
+        ul li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* ===== CODE/KEYBOARD STYLES ===== */
+        kbd {
+            background: var(--bg-code);
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875em;
+        }
+
+        code {
+            background: var(--bg-code);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        /* ===== PLATFORM BADGE ===== */
+        .platform-badge {
+            display: inline-block;
+            background: var(--vpm-blue-light);
+            color: var(--vpm-blue-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: var(--spacing-sm);
+        }
+
+        /* ===== LINKS ===== */
+        a {
+            color: var(--vpm-blue-primary);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            color: var(--vpm-blue-dark);
+        }
+
+        /* External link indicator */
+        a[target="_blank"]::after {
+            content: " ↗";
+            font-size: 0.8em;
+        }
+
+        /* ===== TROUBLESHOOTING TABLE ===== */
+        .troubleshooting-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+        }
+
+        .troubleshooting-table th,
+        .troubleshooting-table td {
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .troubleshooting-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .troubleshooting-table tr:hover {
+            background: var(--bg-light);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--vpm-blue-dark);
+            color: var(--text-on-dark);
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-top: var(--spacing-2xl);
+        }
+
+        footer p {
+            margin: var(--spacing-xs) 0;
+            color: #e2e8f0;
+        }
+
+        footer a {
+            color: #ffffff;
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--vpm-blue-dark);
+            color: var(--text-on-dark);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 8px;
+            font-weight: 500;
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+
+            main {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .signature-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .troubleshooting-table {
+                font-size: 0.9rem;
+            }
+
+            .troubleshooting-table th,
+            .troubleshooting-table td {
+                padding: var(--spacing-xs) var(--spacing-sm);
+            }
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            nav, .copy-btn, .toast {
+                display: none !important;
+            }
+
+            header {
+                background: none;
+                color: var(--text-primary);
+                border-bottom: 2px solid var(--vpm-blue-dark);
+            }
+
+            header h1, header p {
+                color: var(--text-primary);
+                text-shadow: none;
+            }
+
+            .accordion-content {
+                display: block !important;
+            }
+
+            a::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+
+        /* ===== REDUCED MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* ===== HIGH CONTRAST MODE ===== */
+        @media (prefers-contrast: high) {
+            :root {
+                --text-primary: #000000;
+                --text-secondary: #000000;
+                --vpm-blue-primary: #0000cc;
+            }
+
+            .alert {
+                border-width: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header with improved contrast -->
+    <header role="banner">
+        <h1>VPM Email Signature Guidelines</h1>
+        <p>Follow these instructions to set up your professional VPM email signature across all platforms</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Page sections">
+        <h2 id="nav-heading">Quick Navigation</h2>
+        <ul class="nav-links" aria-labelledby="nav-heading">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#templates">Signature Templates</a></li>
+            <li><a href="#instructions">Setup Instructions</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#support">Get Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        
+        <!-- Overview Section -->
+        <section id="overview" aria-labelledby="overview-heading">
+            <h2 id="overview-heading">Overview</h2>
+            <p>To support our marketing and brand management strategy, and to help members, partners, and external parties communicate with us easily, it's important to follow these formal guidelines for email signatures.</p>
+            
+            <div class="alert alert-warning" role="alert">
+                <strong>⚠️ Important: Choose the Correct Address</strong>
+                <ul>
+                    <li><strong>Richmond staff:</strong> Use Template 1 (Richmond HQ)</li>
+                    <li><strong>Charlottesville staff:</strong> Use Template 2 (Charlottesville)</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info" role="note">
+                <strong>📋 Quick Setup Steps</strong>
+                <ol>
+                    <li>Choose your template based on your location</li>
+                    <li>Copy the signature using the button below</li>
+                    <li>Find your Outlook platform in the instructions</li>
+                    <li>Paste and customize with your information</li>
+                    <li>Set as your default signature</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Templates Section -->
+        <section id="templates" aria-labelledby="templates-heading">
+            <h2 id="templates-heading">Signature Templates</h2>
+            
+            <div class="alert alert-info" role="note">
+                <strong>Formatting Requirements</strong>
+                <p style="margin-bottom: 0;">All signatures must use <strong>Arial, 11pt</strong> font. Do not change colors, fonts, or hyperlinks.</p>
+            </div>
+
+            <!-- Richmond Template -->
+            <div class="signature-container" id="richmond">
+                <div class="signature-header">
+                    <h4 id="richmond-heading">Template 1: Richmond HQ</h4>
+                    <button class="copy-btn" onclick="copySignature('richmond-sig')" aria-describedby="richmond-heading">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>Copy Signature</span>
+                    </button>
+                </div>
+                <div class="signature-box" id="richmond-sig" role="region" aria-label="Richmond signature template">
+                    <p style="margin: 0; font-family: Arial, sans-serif; font-size: 11pt; color: #000000;">
+                        <strong style="color: #000000;">First Name Last Name</strong><br>
+                        <span style="color: #000000;">Title</span><br>
+                        <span style="color: #000000;">Office: 555.555.5555</span><br>
+                        <span style="color: #000000;">Mobile: 555.555.5555</span>
+                    </p>
+                    <p style="margin: 10px 0 0 0; font-family: Arial, sans-serif; font-size: 11pt; color: #000000;">
+                        <strong>VPM</strong> | Virginia's home for public media<br>
+                        15 E Broad St, Richmond, VA 23219
+                    </p>
+                    <p style="margin: 10px 0 0 0; font-family: Arial, sans-serif; font-size: 11pt;">
+                        <a href="https://www.vpm.org" style="color: #0563c1; text-decoration: underline;">VPM.org</a> | Find VPM on:
+                        <a href="https://www.youtube.com/@VPM" style="color: #0563c1; text-decoration: underline;">YouTube</a>,
+                        <a href="https://www.instagram.com/myvpm" style="color: #0563c1; text-decoration: underline;">Instagram</a>,
+                        <a href="https://www.tiktok.com/@myvpm" style="color: #0563c1; text-decoration: underline;">TikTok</a>,
+                        <a href="https://jm.linkedin.com/company/vpm-media-corporation" style="color: #0563c1; text-decoration: underline;">LinkedIn</a> &amp;
+                        <a href="https://www.facebook.com/myvpm" style="color: #0563c1; text-decoration: underline;">Facebook</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Charlottesville Template -->
+            <div class="signature-container" id="charlottesville">
+                <div class="signature-header">
+                    <h4 id="cville-heading">Template 2: Charlottesville</h4>
+                    <button class="copy-btn" onclick="copySignature('cville-sig')" aria-describedby="cville-heading">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>Copy Signature</span>
+                    </button>
+                </div>
+                <div class="signature-box" id="cville-sig" role="region" aria-label="Charlottesville signature template">
+                    <p style="margin: 0; font-family: Arial, sans-serif; font-size: 11pt; color: #000000;">
+                        <strong style="color: #000000;">First Name Last Name</strong><br>
+                        <span style="color: #000000;">Title</span><br>
+                        <span style="color: #000000;">Office: 555.555.5555</span><br>
+                        <span style="color: #000000;">Mobile: 555.555.5555</span>
+                    </p>
+                    <p style="margin: 10px 0 0 0; font-family: Arial, sans-serif; font-size: 11pt; color: #000000;">
+                        <strong>VPM</strong> | Virginia's home for public media<br>
+                        225 East Main Street, Charlottesville, VA 22902
+                    </p>
+                    <p style="margin: 10px 0 0 0; font-family: Arial, sans-serif; font-size: 11pt;">
+                        <a href="https://www.vpm.org" style="color: #0563c1; text-decoration: underline;">VPM.org</a> | Find VPM on:
+                        <a href="https://www.youtube.com/@VPM" style="color: #0563c1; text-decoration: underline;">YouTube</a>,
+                        <a href="https://www.instagram.com/myvpm" style="color: #0563c1; text-decoration: underline;">Instagram</a>,
+                        <a href="https://www.tiktok.com/@myvpm" style="color: #0563c1; text-decoration: underline;">TikTok</a>,
+                        <a href="https://jm.linkedin.com/company/vpm-media-corporation" style="color: #0563c1; text-decoration: underline;">LinkedIn</a> &amp;
+                        <a href="https://www.facebook.com/myvpm" style="color: #0563c1; text-decoration: underline;">Facebook</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructions Section -->
+        <section id="instructions" aria-labelledby="instructions-heading">
+            <h2 id="instructions-heading">Setup Instructions by Platform</h2>
+            <p>Select your Outlook version below for step-by-step instructions. Not sure which version you have? Check the <a href="#identify-version">platform identification guide</a> below.</p>
+
+            <div class="accordion" role="region" aria-label="Outlook platform setup instructions">
+                
+                <!-- New Outlook for Windows -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false" aria-controls="new-outlook-content" id="new-outlook-header">
+                        <span>New Outlook for Windows <span class="platform-badge">Recommended</span></span>
+                        <svg class="accordion-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="new-outlook-content" role="region" aria-labelledby="new-outlook-header">
+                        <p><strong>How to identify:</strong> The new Outlook has a simplified ribbon and a toggle switch in the upper-right that says "New Outlook."</p>
+                        
+                        <h4>Create Your Signature</h4>
+                        <ol>
+                            <li>Click the <strong>Settings</strong> gear icon (⚙️) in the upper-right corner</li>
+                            <li>Select <strong>Accounts</strong> → <strong>Signatures</strong></li>
+                            <li>Click <strong>+ New signature</strong></li>
+                            <li>Name your signature <code>VPM Default</code></li>
+                            <li>Copy and paste your template from above into the editor</li>
+                            <li>Replace placeholder text with your information</li>
+                        </ol>
+
+                        <h4>Set as Default</h4>
+                        <ol>
+                            <li>Under <strong>Select default signatures</strong>, choose your signature for:
+                                <ul>
+                                    <li><strong>New messages:</strong> VPM Default</li>
+                                    <li><strong>Replies/forwards:</strong> VPM Default</li>
+                                </ul>
+                            </li>
+                            <li>Click <strong>Save</strong></li>
+                        </ol>
+
+                        <div class="alert alert-success" role="note">
+                            <strong>✓ Tip:</strong> After pasting, if formatting looks off, select all the signature text and manually set the font to Arial, 11pt.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classic Outlook Desktop (Windows) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false" aria-controls="classic-outlook-content" id="classic-outlook-header">
+                        <span>Classic Outlook Desktop (Windows)</span>
+                        <svg class="accordion-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="classic-outlook-content" role="region" aria-labelledby="classic-outlook-header">
+                        <p><strong>How to identify:</strong> Classic Outlook has a File menu in the top-left and a more complex ribbon interface.</p>
+                        
+                        <h4>Create Your Signature</h4>
+                        <ol>
+                            <li>Click <strong>File</strong> → <strong>Options</strong></li>
+                            <li>Select <strong>Mail</strong> from the left sidebar</li>
+                            <li>Click <strong>Signatures...</strong> button</li>
+                            <li>Click <strong>New</strong> and name it <code>VPM Default</code></li>
+                            <li>In the editor, set the font to <strong>Arial, 11pt</strong> before pasting</li>
+                            <li>Copy and paste your template from above</li>
+                            <li>If formatting changes, click the <strong>Paste Options</strong> icon and select <strong>Match Destination Formatting</strong></li>
+                            <li>Replace placeholder text with your information</li>
+                        </ol>
+
+                        <h4>Set as Default</h4>
+                        <ol>
+                            <li>Under <strong>Choose default signature</strong>:
+                                <ul>
+                                    <li><strong>New messages:</strong> VPM Default</li>
+                                    <li><strong>Replies/forwards:</strong> VPM Default</li>
+                                </ul>
+                            </li>
+                            <li>Click <strong>OK</strong> to save</li>
+                        </ol>
+
+                        <p><a href="https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-8ee5d4f4-68fd-464a-a1c1-0e1c80bb27f2" target="_blank">Microsoft's official guide for Classic Outlook</a></p>
+                    </div>
+                </div>
+
+                <!-- Outlook for Mac -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false" aria-controls="outlook-mac-content" id="outlook-mac-header">
+                        <span>Outlook for Mac</span>
+                        <svg class="accordion-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="outlook-mac-content" role="region" aria-labelledby="outlook-mac-header">
+                        <h4>Create Your Signature</h4>
+                        <ol>
+                            <li>In the menu bar, click <strong>Outlook</strong> → <strong>Preferences</strong> (or press <kbd>⌘</kbd> + <kbd>,</kbd>)</li>
+                            <li>Click <strong>Signatures</strong></li>
+                            <li>Click the <strong>+</strong> button to create a new signature</li>
+                            <li>Name it <code>VPM Default</code></li>
+                            <li>Copy and paste your template into the editor</li>
+                            <li>Replace placeholder text with your information</li>
+                        </ol>
+
+                        <h4>Set as Default</h4>
+                        <ol>
+                            <li>Close the signature editor</li>
+                            <li>Under <strong>Choose default signature</strong>:
+                                <ul>
+                                    <li>Select your account</li>
+                                    <li><strong>New messages:</strong> VPM Default</li>
+                                    <li><strong>Replies/forwards:</strong> VPM Default</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <div class="alert alert-info" role="note">
+                            <strong>Note:</strong> Mac Outlook has a real-time preview feature. Use it to verify your signature looks correct before saving.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outlook on the Web -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false" aria-controls="outlook-web-content" id="outlook-web-header">
+                        <span>Outlook on the Web (outlook.office.com)</span>
+                        <svg class="accordion-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="outlook-web-content" role="region" aria-labelledby="outlook-web-header">
+                        <h4>Create Your Signature</h4>
+                        <ol>
+                            <li>Go to <a href="https://outlook.office.com" target="_blank">outlook.office.com</a> and sign in</li>
+                            <li>Click the <strong>Settings</strong> gear icon (⚙️) in the top-right</li>
+                            <li>Click <strong>View all Outlook settings</strong></li>
+                            <li>Select <strong>Mail</strong> → <strong>Compose and reply</strong></li>
+                            <li>Scroll to <strong>Email signature</strong></li>
+                            <li>Click <strong>+ New signature</strong></li>
+                            <li>Name it <code>VPM Default</code></li>
+                            <li>Copy and paste your template</li>
+                            <li>Replace placeholder text with your information</li>
+                        </ol>
+
+                        <h4>Set as Default</h4>
+                        <ol>
+                            <li>Under <strong>Select default signatures</strong>:
+                                <ul>
+                                    <li><strong>For new messages:</strong> VPM Default</li>
+                                    <li><strong>For replies/forwards:</strong> VPM Default</li>
+                                </ul>
+                            </li>
+                            <li>Click <strong>Save</strong></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Outlook Mobile (iOS) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false" aria-controls="outlook-ios-content" id="outlook-ios-header">
+                        <span>Outlook Mobile (iPhone/iPad)</span>
+                        <svg class="accordion-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="outlook-ios-content" role="region" aria-labelledby="outlook-ios-header">
+                        <div class="alert alert-warning" role="note">
+                            <strong>⚠️ Mobile Limitation:</strong> Mobile signatures are text-only and don't support HTML formatting. Create a simplified version.
+                        </div>
+
+                        <h4>Create Your Signature</h4>
+                        <ol>
+                            <li>Open the Outlook app</li>
+                            <li>Tap your <strong>profile picture</strong> in the top-left</li>
+                            <li>Tap the <strong>gear icon</strong> (⚙️) at the bottom-left</li>
+                            <li>Under your account, tap <strong>Signature</strong></li>
+                            <li>Enter a simplified text signature:
+                                <div style="background: var(--bg-code); padding: var(--spacing-sm); margin: var(--spacing-sm) 0; border-radius: 4px; font-family: monospace; font-size: 0.9em;">
+First Name Last Name<br>
+Title<br>
+Office: 555.555.5555<br>
+VPM | Virginia's home for public media<br>
+VPM.org
+                                </div>
+                            </li>
+                            <li>Tap <strong>Done</strong> or the checkmark to save</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Outlook Mobile (Android) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false" aria-controls="outlook-android-content" id="outlook-android-header">
+                        <span>Outlook Mobile (Android)</span>
+                        <svg class="accordion-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content" id="outlook-android-content" role="region" aria-labelledby="outlook-android-header">
+                        <div class="alert alert-warning" role="note">
+                            <strong>⚠️ Mobile Limitation:</strong> Mobile signatures are text-only. Keep it concise (2-3 lines recommended).
+                        </div>
+
+                        <h4>Create Your Signature</h4>
+                        <ol>
+                            <li>Open the Outlook app</li>
+                            <li>Tap your <strong>profile picture/icon</strong> in the top-left</li>
+                            <li>Tap the <strong>gear icon</strong> (⚙️) at the bottom-left</li>
+                            <li>Tap your <strong>account name</strong></li>
+                            <li>Tap <strong>Signature</strong></li>
+                            <li>Enter a simplified text signature:
+                                <div style="background: var(--bg-code); padding: var(--spacing-sm); margin: var(--spacing-sm) 0; border-radius: 4px; font-family: monospace; font-size: 0.9em;">
+First Name Last Name<br>
+Title<br>
+Office: 555.555.5555<br>
+VPM | Virginia's home for public media<br>
+VPM.org
+                                </div>
+                            </li>
+                            <li>Tap <strong>Done</strong> or the checkmark to save</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Platform Identification Help -->
+            <div id="identify-version" style="margin-top: var(--spacing-xl);">
+                <h3>How to Identify Your Outlook Version</h3>
+                <table class="troubleshooting-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">If you see...</th>
+                            <th scope="col">You have...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"New Outlook" toggle in top-right, simplified ribbon</td>
+                            <td><strong>New Outlook for Windows</strong></td>
+                        </tr>
+                        <tr>
+                            <td>File menu in top-left, complex ribbon with many tabs</td>
+                            <td><strong>Classic Outlook Desktop (Windows)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Outlook menu in Mac menu bar, ⌘ shortcuts</td>
+                            <td><strong>Outlook for Mac</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Browser address bar shows outlook.office.com</td>
+                            <td><strong>Outlook on the Web</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Outlook app on phone with App Store/Play Store icon</td>
+                            <td><strong>Outlook Mobile</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Troubleshooting Section -->
+        <section id="troubleshooting" aria-labelledby="troubleshooting-heading">
+            <h2 id="troubleshooting-heading">Troubleshooting</h2>
+            
+            <table class="troubleshooting-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Problem</th>
+                        <th scope="col">Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Signature has wrong font or size after pasting</td>
+                        <td>Select all text in the signature editor, then manually set to Arial, 11pt. Or use "Match Destination Formatting" paste option.</td>
+                    </tr>
+                    <tr>
+                        <td>Gray background appears when pasting signature</td>
+                        <td>This is a known Outlook issue. Select the signature, click the highlight/background color button, and choose "No Color."</td>
+                    </tr>
+                    <tr>
+                        <td>Signature doesn't appear on new emails</td>
+                        <td>Check that the signature is set as default for both new messages AND replies/forwards. Restart Outlook if needed.</td>
+                    </tr>
+                    <tr>
+                        <td>Links don't work in signature</td>
+                        <td>Make sure URLs include "https://" at the beginning. Re-copy the template if links were broken.</td>
+                    </tr>
+                    <tr>
+                        <td>Signature looks different to recipients</td>
+                        <td>Email clients render HTML differently. Stick to the approved template—it's tested for maximum compatibility.</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile signature doesn't match desktop</td>
+                        <td>Mobile signatures must be set separately and are text-only. Use the simplified format provided above.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" aria-labelledby="support-heading">
+            <h2 id="support-heading">Need Help?</h2>
+            <p>If you're having trouble setting up your email signature or have questions about these guidelines:</p>
+            <ul>
+                <li><strong>IT Support:</strong> Submit a ticket through the IT Help Desk</li>
+                <li><strong>Brand Questions:</strong> Contact the Marketing department</li>
+                <li><strong>Microsoft Resources:</strong> <a href="https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-8ee5d4f4-68fd-464a-a1c1-0e1c80bb27f2" target="_blank">Official Microsoft Signature Guide</a></li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <p><strong>VPM</strong> — Virginia's home for public media</p>
+        <p><a href="https://www.vpm.org" target="_blank">vpm.org</a></p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" role="status" aria-live="polite" id="toast">Signature copied to clipboard!</div>
+
+    <!-- JavaScript -->
+    <script>
+        // Copy signature function
+        function copySignature(elementId) {
+            const signatureBox = document.getElementById(elementId);
+            const button = signatureBox.closest('.signature-container').querySelector('.copy-btn');
+            
+            // Create a range and select the signature content
+            const range = document.createRange();
+            range.selectNodeContents(signatureBox);
+            
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            try {
+                // Copy to clipboard
+                document.execCommand('copy');
+                
+                // Update button state
+                const originalText = button.querySelector('span').textContent;
+                button.querySelector('span').textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                // Show toast
+                showToast();
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    button.querySelector('span').textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Unable to copy. Please select the signature manually and use Ctrl+C (or Cmd+C on Mac).');
+            }
+            
+            // Clear selection
+            selection.removeAllRanges();
+        }
+
+        // Show toast notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                
+                // Close all accordion items
+                document.querySelectorAll('.accordion-header').forEach(btn => {
+                    btn.setAttribute('aria-expanded', 'false');
+                    document.getElementById(btn.getAttribute('aria-controls')).classList.remove('active');
+                });
+                
+                // Open clicked item if it was closed
+                if (!isExpanded) {
+                    button.setAttribute('aria-expanded', 'true');
+                    document.getElementById(button.getAttribute('aria-controls')).classList.add('active');
+                }
+            });
+
+            // Keyboard support
+            button.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    button.click();
+                }
+            });
+        });
+
+        // Open first accordion by default
+        document.querySelector('.accordion-header').click();
+
+        // Hide/show navigation on scroll
+        (function() {
+            const nav = document.querySelector('nav');
+            let lastScrollTop = 0;
+            let scrollThreshold = 5; // Minimum scroll distance to trigger
+            let isScrolling;
+
+            window.addEventListener('scroll', function() {
+                // Clear timeout if user is still scrolling
+                window.clearTimeout(isScrolling);
+
+                // Set a timeout to run after scrolling ends
+                isScrolling = setTimeout(function() {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                    // Check if we've scrolled past the threshold
+                    if (Math.abs(scrollTop - lastScrollTop) < scrollThreshold) {
+                        return;
+                    }
+
+                    if (scrollTop > lastScrollTop && scrollTop > 100) {
+                        // Scrolling down & past 100px
+                        nav.classList.add('nav-hidden');
+                    } else {
+                        // Scrolling up
+                        nav.classList.remove('nav-hidden');
+                    }
+
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                }, 50); // Wait 50ms after scroll stops
+            }, false);
+
+            // Show nav when it receives keyboard focus (accessibility)
+            nav.addEventListener('focusin', function() {
+                nav.classList.remove('nav-hidden');
+            });
+        })();
+    </script>
+</body>
+</html>
